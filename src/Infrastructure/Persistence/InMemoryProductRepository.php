@@ -2,6 +2,8 @@
 
 namespace App\Infrastructure\Persistence;
 
+use App\Domain\Link;
+use App\Domain\Money;
 use App\Domain\Product;
 use App\Domain\ProductId;
 use App\Domain\Repository\ProductRepository;
@@ -13,7 +15,16 @@ final class InMemoryProductRepository implements ProductRepository {
      * @param Product[] $products
      */
     public function __construct(array $products = []) {
-        $this->products = $products;
+        foreach ($products as $raw) {
+            $id = ProductId::generate();
+            $this->products[] = new Product(
+                $id,
+                $raw['name'],
+                $raw['desc'],
+                new Link($raw['img']),
+                new Money($raw['price'])
+            );
+        }
     }
 
     public function save(Product $product): void {

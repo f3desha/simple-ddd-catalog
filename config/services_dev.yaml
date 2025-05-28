@@ -1,0 +1,35 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+services:
+    App\Infrastructure\Persistence\InMemoryProductRepository:
+        arguments:
+            $products:
+                - { name: 'Smartphone X',
+                    desc: 'Latest smartphone with advanced features and high-resolution camera.',
+                    img: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=300&h=200&fit=crop',
+                    price: 599.99 }
+                - { name: 'Wireless Headphones',
+                    desc: 'Premium noise-cancelling headphones with long battery life.',
+                    img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=200&fit=crop',
+                    price: 149.99 }
+                - { name: 'Smartwatch Pro',
+                    desc: 'Feature-rich smartwatch with health monitoring and GPS.',
+                    img: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=300&h=200&fit=crop',
+                    price: 249.99 }
+                - { name: 'Laptop Ultra',
+                    desc: 'Powerful laptop with high-performance processor and dedicated graphics.',
+                    img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300&h=200&fit=crop',
+                    price: 1299.99 }
+                - { name: 'Bluetooth Speaker',
+                    desc: 'Portable speaker with rich sound and waterproof design.',
+                    img: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=300&h=200&fit=crop',
+                    price: 79.99 }
+                - { name: 'Digital Camera',
+                    desc: 'Professional camera with high-resolution sensor and interchangeable lenses.',
+                    img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=300&h=200&fit=crop',
+                    price: 899.99 }
+
+    App\Domain\Repository\ProductRepository: '@App\Infrastructure\Persistence\InMemoryProductRepository'
